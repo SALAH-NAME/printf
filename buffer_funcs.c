@@ -5,11 +5,11 @@
 
 /**
  * _memcpy - copies memory area
- * @dest: dest memory area
- * @src: src memory area
- * @n: num of bytes to copy
- * @bufferlen: current num of bytes taken by buffer
- * Return: pointer to dest memory area
+ * @dest: destination memory area
+ * @src: source memory area
+ * @n: number of bytes to copy
+ * @bufferlen: current number of bytes taken by buffer
+ * Return: pointer to destination memory area
  */
 
 char *_memcpy(char *dest, char *src, unsigned int n, unsigned int bufferlen)
@@ -18,17 +18,16 @@ char *_memcpy(char *dest, char *src, unsigned int n, unsigned int bufferlen)
 
 	for (i = 0; i < n; i++)
 		dest[i + bufferlen] = src[i];
-	
 	return (dest);
 }
 
 /**
- * alloc_buffer - allocates chars to buffer, with overflows
+ * alloc_buffer - allocates characters to buffer, with overflows
  * @hold: string to allocate into buffer
  * @hlen: hold length
  * @buffer: buffer char array
  * @size: end of buffer
- * @total: pointer to total char counter
+ * @total: pointer to total character counter
  * Return: buffer length
  */
 
@@ -51,6 +50,5 @@ int alloc_buffer(char *hold, int hlen, char *buffer, int size, double *total)
 		_memcpy(buffer, hold, hlen, size);
 		size += hlen;
 	}
-	
 	return (size);
 }

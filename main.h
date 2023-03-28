@@ -1,15 +1,14 @@
-#ifndef _PRINTF_H_
-#define _PRINTF_H_
+#ifndef PRINTF_H
+#define PRINTF_H
 
 #define BUFSIZE 1024
 #include <stdarg.h>
 
 /**
- * struct spec_types - struct to get function of specifier
+ * struct spec_types - Struct to get function of specifier
  * @spec: specifier
- * @f: function associated
+ * @f: The function associated
  */
-
 typedef struct spec_types
 {
 	char *spec;
@@ -39,4 +38,4 @@ char *HEX_find(va_list n);
 char *address_find(va_list n);
 char *rev_string(char *a, int n);
 
-#endif
+#endif /*PRINTF_H*/

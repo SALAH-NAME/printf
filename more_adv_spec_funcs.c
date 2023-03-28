@@ -17,12 +17,9 @@ char *hex_find(va_list n)
 
 	for (hold = arg, size = 0; hold; hold /= 16)
 		size++;
-
 	hexaDeciNum = malloc((size + 1) * sizeof(char));
-
 	if (hexaDeciNum == NULL)
 		return (NULL);
-
 	for (i = 0; arg; arg /= 16, i++)
 	{
 		temp = arg % 16;
@@ -31,10 +28,8 @@ char *hex_find(va_list n)
 		else
 			hexaDeciNum[i] = (temp + 'a' - 10);
 	}
-
 	return (rev_string(hexaDeciNum, _strlen(hexaDeciNum)));
 }
-
 /**
  * HEX_find - convert int to hex
  * @n: integer
@@ -50,12 +45,9 @@ char *HEX_find(va_list n)
 
 	for (hold = arg, size = 0; hold; hold /= 16)
 		size++;
-
 	hexaDeciNum = malloc((size + 1) * sizeof(char));
-
 	if (hexaDeciNum == NULL)
 		return (NULL);
-
 	for (i = 0; arg; arg /= 16, i++)
 	{
 		temp = arg % 16;
@@ -64,10 +56,8 @@ char *HEX_find(va_list n)
 		else
 			hexaDeciNum[i] = (temp + 'A' - 10);
 	}
-
 	return (rev_string(hexaDeciNum, _strlen(hexaDeciNum)));
 }
-
 /**
  * address_find - get address
  * @n: integer
@@ -83,12 +73,9 @@ char *address_find(va_list n)
 
 	for (hold = arg, size = 0; hold; hold /= 16)
 		size++;
-
 	address = malloc((size + 3) * sizeof(char));
-
 	if (address == NULL)
 		return (NULL);
-
 	for (i = 0; arg; arg /= 16, i++)
 	{
 		temp = arg % 16;
@@ -97,9 +84,7 @@ char *address_find(va_list n)
 		else
 			address[i] = (temp + 'a' - 10);
 	}
-
 	address[i++] = 'x';
 	address[i] = '0';
-
 	return (rev_string(address, _strlen(address)));
 }

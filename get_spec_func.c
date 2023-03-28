@@ -3,8 +3,8 @@
 
 /**
  * get_spec_func - check specifier type and return function
- * @s: type input
- * Return: pointer to function to use
+ *@s: type to check
+ *Return: pointer to function to use
  */
 
 char *(*get_spec_func(char s))(va_list)

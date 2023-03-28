@@ -4,8 +4,8 @@
 
 /**
  * _printf - function that prints output
- * @format: is a char str with 0 to 3 directives
- * Return: number of chars to be printed
+ * @format: is a charachter string with 0 to 3 directives
+ * Return: the number of charachters to be printed
  */
 
 int _printf(const char *format, ...)
@@ -20,13 +20,10 @@ int _printf(const char *format, ...)
 
 	if (!format)
 		return (-1);
-	
 	va_start(valist, format);
 	total = &totalBuffer;
-	
 	for (i = 0; i < BUFSIZE; i++)
 		buffer[i] = 0;
-	
 	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
@@ -43,9 +40,7 @@ int _printf(const char *format, ...)
 			buffend = alloc_buffer(holder, 1, buffer, buffend, total);
 		}
 	}
-	
 	_puts(buffer, buffend);
 	va_end(valist);
-	
 	return (totalBuffer + buffend);
 }
