@@ -1,46 +1,51 @@
-#include <stddef.h>
-#include <stdio.h>
 #include "main.h"
 
 /**
- * _printf - function that prints output
- * @format: is a charachter string with 0 to 3 directives
- * Return: the number of charachters to be printed
+ * _printf - formatted output conversion and print data.
+ * @format: input string.
+ *
+ * Return: number of chars printed.
  */
-
 int _printf(const char *format, ...)
 {
-	va_list valist;
-	int i, buffend = 0;
-	double totalBuffer = 0;
-	double *total;
-	char *holder;
-	char buffer[BUFSIZE];
-	char *(*spec_func)(va_list) = NULL;
+	unsigned int i = 0, len = 0, ibuf = 0;
+	va_list arguments;
+	int (*function)(va_list, char *, unsigned int);
+	char *buffer;
 
-	if (!format)
+	va_start(arguments, format), buffer = malloc(sizeof(char) * 1024);
+	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
 		return (-1);
-	va_start(valist, format);
-	total = &totalBuffer;
-	for (i = 0; i < BUFSIZE; i++)
-		buffer[i] = 0;
+	if (!format[i])
+		return (0);
 	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
-			i++;
-			spec_func = get_spec_func(format[i]);
-			holder = (spec_func) ? spec_func(valist) : nothing_found(format[i]);
-			if (holder)
-				buffend = alloc_buffer(holder, _strlen(holder), buffer, buffend, total);
+			if (format[i + 1] == '\0')
+			{	print_buf(buffer, ibuf), free(buffer), va_end(arguments);
+				return (-1);
+			}
+			else
+			{	function = get_print_func(format, i + 1);
+				if (function == NULL)
+				{
+					if (format[i + 1] == ' ' && !format[i + 2])
+						return (-1);
+					handl_buf(buffer, format[i], ibuf), len++, i--;
+				}
+				else
+				{
+					len += function(arguments, buffer, ibuf);
+					i += ev_print_func(format, i + 1);
+				}
+			} i++;
 		}
 		else
-		{
-			holder = chartos(format[i]);
-			buffend = alloc_buffer(holder, 1, buffer, buffend, total);
-		}
+			handl_buf(buffer, format[i], ibuf), len++;
+		for (ibuf = len; ibuf > 1024; ibuf -= 1024)
+			;
 	}
-	_puts(buffer, buffend);
-	va_end(valist);
-	return (totalBuffer + buffend);
+	print_buf(buffer, ibuf), free(buffer), va_end(arguments);
+	return (len);
 }
